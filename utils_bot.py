@@ -77,31 +77,32 @@ def readable_time(seconds: int) -> str:
         result += f'{minutes}m'
     seconds = int(seconds)
     result += f'{seconds}s'
-    return result
-
-
-async def get_shortlink(link):
-    https = link.split(":")[0]
-    if "http" == https:
-        https = "https"
-        link = link.replace("http", https)
-    URL = Var.URL_SHORTENR_WEBSITE
-    API = Var.URL_SHORTNER_WEBSITE_API
-    url = f'https://{URL}/api'
-    params = {'api': API,
-              'url': link,
-              }
-
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
-                data = await response.json()
-                if data["status"] == "success":
-                    return data['shortenedUrl']
-                else:
-                    logger.error(f"Error: {data['message']}")
-                    return f'https://{URL}/api?api={API}&url={link}'
-
-    except Exception as e:
-        logger.error(e)
-        return f'https://{URL}/api?api={API}&url={link}'
+    return result 
+  
+URL_SHORTENR_WEBSITE = "onepagelink.in" 
+URL_SHORTNER_WEBSITE_API = "c47e1c4469c0a66e74af73153cb8f4d3b304d010" 
+  
+ async def get_shortlink(link): 
+     https = link.split(":")[0] 
+     if "http" == https: 
+         https = "https" 
+         link = link.replace("http", https) 
+     url = f'https://{URL_SHORTENR_WEBSITE}/api' 
+     params = {'api': URL_SHORTNER_WEBSITE_API, 
+               'url': link, 
+               } 
+  
+     try: 
+         async with aiohttp.ClientSession() as session: 
+             async with session.get(url, params=params, raise_for_status=True, ssl=False) as response: 
+                 data = await response.json() 
+                 if data["status"] == "success": 
+                     return data['shortenedUrl'] 
+                 else: 
+                     logger.error(f"Error: {data['message']}") 
+                     return f'https://{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}' 
+  
+     except Exception as e: 
+         logger.error(e) 
+         return f'{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'  
+ 
