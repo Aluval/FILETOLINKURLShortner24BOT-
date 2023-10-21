@@ -80,15 +80,13 @@ def readable_time(seconds: int) -> str:
     return result
 
 
-  URL = Var.URL_SHORTENR_WEBSITE
-  API = Var.URL_SHORTNER_WEBSITE_API
-
-
 async def get_shortlink(link):
     https = link.split(":")[0]
     if "http" == https:
         https = "https"
         link = link.replace("http", https)
+    URL = Var.URL_SHORTENR_WEBSITE
+    API = Var.URL_SHORTNER_WEBSITE_API
     url = f'https://{URL}/api'
     params = {'api': API,
               'url': link,
