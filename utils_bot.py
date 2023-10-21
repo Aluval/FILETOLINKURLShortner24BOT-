@@ -80,13 +80,17 @@ def readable_time(seconds: int) -> str:
     return result
 
 
+  URL = Var.URL_SHORTENR_WEBSITE
+  API = Var.URL_SHORTNER_WEBSITE_API
+
+
 async def get_shortlink(link):
     https = link.split(":")[0]
     if "http" == https:
         https = "https"
         link = link.replace("http", https)
-    url = f'https://{Var.URL_SHORTENR_WEBSITE}/api'
-    params = {'api': Var.URL_SHORTNER_WEBSITE_API,
+    url = f'https://{URL}/api'
+    params = {'api': API,
               'url': link,
               }
 
@@ -98,8 +102,8 @@ async def get_shortlink(link):
                     return data['shortenedUrl']
                 else:
                     logger.error(f"Error: {data['message']}")
-                    return f'https://{Var.URL_SHORTENR_WEBSITE}/api?api={Var.URL_SHORTNER_WEBSITE_API}&link={link}'
+                    return f'https://{URL}/api?api={API}&link={link}'
 
     except Exception as e:
         logger.error(e)
-        return f'{Var.URL_SHORTENR_WEBSITE}/api?api={Var.URL_SHORTNER_WEBSITE_API}&link={link}'
+        return f'{URL}/api?api={API}&link={link}'
