@@ -2,6 +2,7 @@ import logging
 import os
 import threading
 import time
+import aiohttp
 from asyncio import TimeoutError
 from pyrogram import filters
 from Adarsh.vars import Var
