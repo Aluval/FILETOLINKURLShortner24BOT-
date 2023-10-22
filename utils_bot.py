@@ -108,9 +108,9 @@ async def get_shortlink(link):
             logger.error(e)
             return f'https://{URL}/shortLink?token={API}&format=json&link={link}'
     else:
-        url = f'https://{URL}/api'
-        params = {'api': API,
-                  'url': link,
+        url = f"https://{URL}/api"
+        params = {"api": API,
+                  "url": link,
                   }
         try:
             async with aiohttp.ClientSession() as session:
