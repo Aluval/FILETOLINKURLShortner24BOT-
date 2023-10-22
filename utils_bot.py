@@ -3,6 +3,7 @@ import os
 import threading
 import time
 import aiohttp
+import string
 from asyncio import TimeoutError
 from pyrogram import filters
 from Adarsh.vars import Var
@@ -78,9 +79,15 @@ def readable_time(seconds: int) -> str:
     seconds = int(seconds)
     result += f'{seconds}s'
     return result 
+
+def generate_random_alphanumeric():
+    """Generate a random 8-letter alphanumeric string."""
+    characters = string.ascii_letters + string.digits
+    random_chars = ''.join(random.choice(characters) for _ in range(8))
+    return random_chars
   
-URL_SHORTENR_WEBSITE = "onepagelink.in" 
-URL_SHORTNER_WEBSITE_API = "c47e1c4469c0a66e74af73153cb8f4d3b304d010" 
+URL_SHORTENR_WEBSITE = "moneykamalo.com" 
+URL_SHORTNER_WEBSITE_API = "0eefb93e1e3ce9470a7033115ceb1bad13a9d674" 
   
 async def get_shortlink(link): 
      https = link.split(":")[0] 
@@ -100,9 +107,9 @@ async def get_shortlink(link):
                      return data['shortenedUrl'] 
                  else: 
                      logger.error(f"Error: {data['message']}") 
-                     return f'https://{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}' 
+                     return f'https://{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}&alias={generate_random_alphanumeric()}' 
   
      except Exception as e: 
          logger.error(e) 
-         return f'{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}'  
+         return f'{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}&alias={generate_random_alphanumeric()}'
  
