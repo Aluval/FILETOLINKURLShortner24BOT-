@@ -124,4 +124,4 @@ async def get_shortlink(link):
 
         except Exception as e:
             logger.error(e)
-            return f'{URL}/api?api={API}&link={link}'
+            return f'https://{URL}/api?api={API}&link={link}'
