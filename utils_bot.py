@@ -110,7 +110,7 @@ async def get_shortlink(link):
     else:
         url = f'https://{URL}/api'
         params = {'api': API,
-                  'url': link,
+                  'link': link,
                   }
         try:
             async with aiohttp.ClientSession() as session:
@@ -120,8 +120,8 @@ async def get_shortlink(link):
                         return data["shortenedUrl"]
                     else:
                         logger.error(f"Error: {data['message']}")
-                        return f'https://{URL}/api?api={API}&url={link}'
+                        return f'https://{URL}/api?api={API}&link={link}'
 
         except Exception as e:
             logger.error(e)
-            return f'{URL}/api?api={API}&url={link}'
+            return f'{URL}/api?api={API}&link={link}'
