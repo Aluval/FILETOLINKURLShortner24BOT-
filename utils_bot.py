@@ -110,7 +110,7 @@ async def get_shortlink(link):
     else:
         url = f'https://{URL}/api'
         params = {'api': API,
-                  'link': link,
+                  'url': link,
                   }
         try:
             async with aiohttp.ClientSession() as session:
