@@ -79,30 +79,48 @@ def readable_time(seconds: int) -> str:
     result += f'{seconds}s'
     return result 
   
-URL_SHORTENR_WEBSITE = "moneykamalo.com" 
-URL_SHORTNER_WEBSITE_API = "0eefb93e1e3ce9470a7033115ceb1bad13a9d674" 
-  
-async def get_shortlink(link): 
-     https = link.split(":")[0] 
-     if "http" == https: 
-         https = "https" 
-         link = link.replace("http", https) 
-     url = f'https://{URL_SHORTENR_WEBSITE}/api' 
-     params = {'api': URL_SHORTNER_WEBSITE_API, 
-               'url': link, 
-               } 
-  
-     try: 
-         async with aiohttp.ClientSession() as session: 
-             async with session.get(url, params=params, raise_for_status=True, ssl=False) as response: 
-                 data = await response.json() 
-                 if data["status"] == "success": 
-                     return data['shortenedUrl'] 
-                 else: 
-                     logger.error(f"Error: {data['message']}") 
-                     return f'https://{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}&alias={generate_random_alphanumeric()}' 
-  
-     except Exception as e: 
-         logger.error(e) 
-         return f'{URL_SHORTENR_WEBSITE}/api?api={URL_SHORTNER_WEBSITE_API}&link={link}&alias={generate_random_alphanumeric()}'
- 
+async def get_shortlink(link):
+    API = SHORTLINK_API
+    URL = SHORTLINK_URL
+    https = link.split(":")[0]
+    if "http" == https:
+        https = "https"
+        link = link.replace("http", https)
+
+    if URL == "api.shareus.in":
+        url = f"https://{URL}/shortLink"
+        params = {"token": API,
+                  "format": "json",
+                  "link": link,
+                  }
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
+                    data = await response.json(content_type="text/html")
+                    if data["status"] == "success":
+                        return data["shortlink"]
+                    else:
+                        logger.error(f"Error: {data['message']}")
+                        return f'https://{URL}/shortLink?token={API}&format=json&link={link}'
+
+        except Exception as e:
+            logger.error(e)
+            return f'https://{URL}/shortLink?token={API}&format=json&link={link}'
+    else:
+        url = f'https://{URL}/api'
+        params = {'api': API,
+                  'url': link,
+                  }
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(url, params=params, raise_for_status=True, ssl=False) as response:
+                    data = await response.json()
+                    if data["status"] == "success":
+                        return data['shortenedUrl']
+                    else:
+                        logger.error(f"Error: {data['message']}")
+                        return f'https://{URL}/api?api={API}&link={link}'
+
+        except Exception as e:
+            logger.error(e)
+            return f'{URL}/api?api={API}&link={link}'
