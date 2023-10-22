@@ -3,6 +3,7 @@ import os
 import threading
 import time
 import aiohttp
+import json
 from asyncio import TimeoutError
 from pyrogram import filters
 from Adarsh.vars import Var
@@ -80,8 +81,8 @@ def readable_time(seconds: int) -> str:
     return result 
   
 async def get_shortlink(link):
-    API = SHORTLINK_API
-    URL = SHORTLINK_URL
+    API = Var.URL_SHORTNER_WEBSITE_API
+    URL = Var.URL_SHORTENR_WEBSITE
     https = link.split(":")[0]
     if "http" == https:
         https = "https"
