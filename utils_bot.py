@@ -3,7 +3,6 @@ import os
 import threading
 import time
 import aiohttp
-import string
 from asyncio import TimeoutError
 from pyrogram import filters
 from Adarsh.vars import Var
@@ -79,12 +78,6 @@ def readable_time(seconds: int) -> str:
     seconds = int(seconds)
     result += f'{seconds}s'
     return result 
-
-def generate_random_alphanumeric():
-    """Generate a random 8-letter alphanumeric string."""
-    characters = string.ascii_letters + string.digits
-    random_chars = ''.join(random.choice(characters) for _ in range(8))
-    return random_chars
   
 URL_SHORTENR_WEBSITE = "moneykamalo.com" 
 URL_SHORTNER_WEBSITE_API = "0eefb93e1e3ce9470a7033115ceb1bad13a9d674" 
