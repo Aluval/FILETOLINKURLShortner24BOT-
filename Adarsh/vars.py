@@ -38,6 +38,6 @@ class Var(object):
     DATABASE_URL = str(getenv('DATABASE_URL', 'mongodb+srv://sushankm16:4i1WAfPYKWyqPIDD@cluster0.sngp9pz.mongodb.net/?retryWrites=true&w=majority'))
     UPDATES_CHANNEL = str(getenv('UPDATES_CHANNEL', 'vj_botz'))
     BANNED_CHANNELS = list(set(int(x) for x in str(getenv("BANNED_CHANNELS", "-1001362659779")).split()))     
-    URL_SHORTENR_WEBSITE = getenv('URL_SHORTENR_WEBSITE', 'moneykamalo.com')
-    URL_SHORTNER_WEBSITE_API = getenv('URL_SHORTNER_WEBSITE_API', '0eefb93e1e3ce9470a7033115ceb1bad13a9d674')
+    SHORTLINK_URL = getenv('SHORTLINK_URL', 'moneykamalo.com')
+    SHORTLINK_API = getenv('SHORTLINK_API', '0eefb93e1e3ce9470a7033115ceb1bad13a9d674')
     
